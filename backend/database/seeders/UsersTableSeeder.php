@@ -15,9 +15,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $items = [
-            ['name' => 'Super Admin', 'email' => 'admin@gmail.com', 'password' => bcrypt('123456789')],
-            ['name' => 'User 1', 'email' => 'user1@gmail.com', 'password' => bcrypt('123456789')],
-            ['name' => 'User 2', 'email' => 'user2@gmail.com', 'password' => bcrypt('123456789')],
+            ['name' => 'Super Admin', 'email' => 'admin@gmail.com', 'password' => bcrypt('123456789'), 'role_id' => 1],
+            ['name' => 'User 1', 'email' => 'user1@gmail.com', 'password' => bcrypt('123456789'), 'role_id' => 2],
+            ['name' => 'User 2', 'email' => 'user2@gmail.com', 'password' => bcrypt('123456789'), 'role_id' => 2],
         ];
 
         foreach ($items as $item) {

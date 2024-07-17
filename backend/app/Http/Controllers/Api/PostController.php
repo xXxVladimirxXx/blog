@@ -20,7 +20,7 @@ class PostController extends Controller
     public function index(): JsonResponse
     {
         try {
-            return $this->successResponse(Post::get());
+            return $this->successResponse($this->postService->get());
         } catch(Exception $e) {
             return $this->errorResponse($e->getMessage());
         }
@@ -34,7 +34,11 @@ class PostController extends Controller
     public function store(PostRequest $request): JsonResponse
     {
         try {
-            return $this->successResponse($this->postService->store($request));
+            return $this->successResponse($this->postService->store(
+                $request->get('title'),
+                $request->get('content'),
+                $request->file('file')
+            ));
         } catch(Exception $e) {
             return $this->errorResponse($e->getMessage());
         }
@@ -44,6 +48,18 @@ class PostController extends Controller
     {
         try {
             return $this->successResponse($this->postService->update($request, $post));
+        } catch(Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
+    }
+
+    public function delete(Post $post): JsonResponse
+    {
+        try {
+            $post->comments()->delete();
+            $post->delete();
+            
+            return $this->successResponse([]);
         } catch(Exception $e) {
             return $this->errorResponse($e->getMessage());
         }

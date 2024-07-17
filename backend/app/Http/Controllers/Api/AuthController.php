@@ -39,11 +39,14 @@ class AuthController extends Controller
             if (User::where('email', $request->email)->first()) {
                 throw new Exception('User with this email already exists');
             }
+            
             $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
+            $user->role_id = 2; // user role
             $user->save();
+
         } catch (Exception $e) {
             return response()->json([
                 'response' => 'error',

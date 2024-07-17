@@ -38,8 +38,9 @@ export default {
                     })
             });
         },
-        logout() {
+        logout(store) {
             axios({ url: "/api/logout", method: "GET" })
+            store.commit('setUser', null)
             localStorage.removeItem("userData")
         }
     },

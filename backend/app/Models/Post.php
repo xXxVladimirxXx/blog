@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $with = ['user', 'comments'];
+    protected $with = ['user'];
 
     protected $fillable = [
         'title',
@@ -28,5 +28,10 @@ class Post extends Model
 
     public function comments() {
         return $this->hasMany(Comment::class);
+    }
+
+    public function files()
+    {
+        return $this->morphMany(File::class, 'fileable');
     }
 }

@@ -10,16 +10,16 @@ export default {
             return new Promise((resolve, reject) => {
                 axios({ url: "/api/posts", method: "GET", params: params })
                     .then(resp => {
+                        commit("setPosts", resp.data.data.data)
                         resolve(resp.data)
                     })
                     .catch(err => reject(err.response)) 
             });
         },
-        getById({ commit }, user_id) {
+        getById({ commit }, post_id) {
             return new Promise((resolve, reject) => {
-                axios({ url: "/api/posts/" + user_id, method: "GET" })
+                axios({ url: "/api/posts/" + post_id, method: "GET" })
                     .then(resp => {
-                        commit("setUser", resp.data.data)
                         resolve(resp.data.data)
                     })
                     .catch(err => reject(err.response)) 
@@ -54,12 +54,12 @@ export default {
         },
     },
     mutations: {
-        setAll(state, posts) {
+        setPosts(state, posts) {
             state.posts = posts
         }
     },
     getters: {
-        all(state) {
+        getPosts(state) {
             return state.posts
         }
     }

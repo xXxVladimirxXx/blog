@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $classes = [
+            RolesTableSeeder::class,
             UsersTableSeeder::class,
             PostsTableSeeder::class,
             CommentsTableSeeder::class,

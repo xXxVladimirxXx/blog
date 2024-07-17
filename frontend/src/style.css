@@ -1,0 +1,8 @@
+a {
+    text-decoration: none;
+}
+
+.navigation a {
+    color: white;
+    margin-left: 1rem;
+}

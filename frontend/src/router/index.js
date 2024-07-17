@@ -11,19 +11,15 @@ router.beforeEach((to, from, next) => {
   const userData = JSON.parse(localStorage.getItem('userData') || '{}')
   const userRole = userData && userData.role ? userData.role : null
 
-  if(!to.meta.redirectIfLoggedIn && (!isUserLoggedIn())) {
-    if (to.name == 'index') {
-      window.location.replace(import.meta.env.VITE_LANDING_URL)
-    }
-
+  if(to.meta.requiresAuth && !isUserLoggedIn() && to.name != 'login') {
     next('/login');
-  } else if((to.name == 'register' || to.name == 'login') && (isUserLoggedIn())) {
+  } else if((to.name == 'register' || to.name == 'login') && isUserLoggedIn()) {
     next('/');
   } else {
-    if (to.meta.suitableRoles && userRole) {
+    if (to.meta.role && userRole) {
       // Checking if a currentUser has a suitable role
-      if (!to.meta.suitableRoles.find(el => el == userRole.name)) {
-        next('/');
+      if (to.meta.role != userRole.name) {
+        next('/login');
       }
     }
   }

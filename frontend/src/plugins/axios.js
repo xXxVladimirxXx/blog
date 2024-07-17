@@ -9,7 +9,8 @@ const axiosIns = axios.create({
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
   },
-  withCredentials: true
+  withCredentials: true,
+  withXSRFToken: true
 // timeout: 1000,
 // headers: {'X-Custom-Header': 'foobar'}
 })
